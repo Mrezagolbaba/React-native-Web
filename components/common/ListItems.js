@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
-import logo from "../assets/images/robot-dev.png";
+import logo from "../../assets/images/robot-dev.png";
 import {Tab} from "native-base";
 
 const ListItems = (props)=> {
