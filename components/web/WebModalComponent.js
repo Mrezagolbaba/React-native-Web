@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import {Image, StyleSheet, Text, TouchableHighlight, View, Button,Dimensions,ScrollView} from 'react-native';
 // import Modal from "react-native-modal";
 import Modal from "modal-enhanced-react-native-web";
-import window from '../constants/Layout'
+import window from '../../constants/Layout'
 
 
 class WebModalComponent extends Component{
@@ -24,7 +24,7 @@ class WebModalComponent extends Component{
         }
     };
     render(){
-        const {isVisible}=this.props
+        const {isVisible,onBackdropPress}=this.props
         return(
             <Modal
                 isVisible={isVisible}
@@ -34,6 +34,7 @@ class WebModalComponent extends Component{
                 scrollOffset={this.state.scrollOffset}
                 scrollOffsetMax={400 - 300} // content height - ScrollView height
                 style={styles.bottomModal}
+                onBackdropPress={onBackdropPress}
             >
                 <View style={styles.scrollableModal}>
                     <ScrollView
