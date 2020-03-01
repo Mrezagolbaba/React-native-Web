@@ -1,6 +1,4 @@
 import React from 'react';
-import Modal from 'react-native-modalbox';
-import Slider from 'react-native-slider';
 
 import {
     Text,
@@ -9,47 +7,57 @@ import {
     ScrollView,
     View,
     Dimensions,
-    TextInput
+    TextInput,
+    Modal,Image,TouchableOpacity
 } from 'react-native';
+// import Image from "react-native";
+import logo from'../../assets/images/robot-dev.png'
 
 var screen = Dimensions.get('window');
 
-export default class ModalComponent extends React.Component {
-
-    constructor() {
-        super();
-        this.state = {
-            isOpen: false,
-            isDisabled: false,
-            swipeToClose: true,
-            sliderValue: 0.3
-        };
-    }
-
-    onClose() {
-        console.log('Modal just closed');
-    }
-
-    onOpen() {
-        console.log('Modal just opened');
-    }
-
-    onClosingState(state) {
-        console.log('the open/close of the swipeToClose just changed');
-    }
-    render() {
+const ModalComponent = (props) => {
+        const {visible,onRequestClose,name,tagline,abv,description,food,data}=props
+    console.log('data',data)
         return (
-            <View style={styles.wrapper}>
-                <Button title="Position bottom + backdrop + slider" onPress={() => this.refs.modal4.open()} style={styles.btn}/>
-                <Modal style={[styles.modal, styles.modal4]} position={"bottom"} ref={"modal4"}>
-                    <Text style={styles.text}>Modal on bottom with backdrop</Text>
-                    <Slider style={{width: 200}} value={this.state.sliderValue} onValueChange={(value) => this.setState({sliderValue: value})} />
-                </Modal>
-            </View>
-        );
-    }
+            // <View style={styles.wrapper}>
+                <Modal animationType="slide"
+                       transparent={true}
+                       visible={visible}
+                       onRequestClose={onRequestClose}
+                       style={styles.Modal}
+                >
+                    <View style={styles.ViewItem}>
+                        <View style={styles.wrapperButton}>
+                            <TouchableOpacity style={styles.closeCard} onPress={onRequestClose}>
+                                <Text>close</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.main}>
+                            <Text style={styles.textTitle}>{data&&data.name}</Text>
+                            <View style={{display:'flex',flexDirection:'row'}}>
+                                <View style={{display:'flex',flexDirection:'column',width: '70%'}}>
+                                    <Text style={styles.text}>{data&&data.tagline}</Text>
+                                    <Text style={styles.text}>{data&&data.abv}</Text>
+                                    <Text numberOfLines={2} ellipsizeMode='tail' style={styles.textDescription}>{data&&data.description}</Text>
+                                    <Text style={styles.text}>{food}</Text>
+                                </View>
+                                <View style={styles.wrapperImage}>
+                                    <Image source={{uri:data&&data.image_url}} style={styles.ImageCard}/>
+                                </View>
+                            </View>
+                            <View style={styles.wrapperButton}>
+                                <TouchableOpacity style={styles.addToCard}>
+                                    <Text>ADD TO CARD</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
 
+                    </View>
+                </Modal>
+            // </View>
+        );
 }
+export default ModalComponent
 
 const styles = StyleSheet.create({
 
@@ -57,36 +65,81 @@ const styles = StyleSheet.create({
         paddingTop: 50,
         flex: 1
     },
+    wrapperButton:{
+        width:290,
+    },
+    addToCard:{
+        width:125,
+        height: 35,
+        borderRadius: 10,
+        backgroundColor:'#FFF',
+        alignItems:'center',
+        justifyContent:'center',
+        alignSelf:'flex-end',
 
-    modal: {
+    },
+    wrapperImage:{
+      backgroundColor:'#FFF',
+        width:80,
+        height: 80,
+        borderRadius: 10,
+        alignItems:'center',
+        justifyContent:'center',
+    },
+    ImageCard:{
+        width:50,
+        height: 50,
+        borderRadius: 5
+    },
+    closeCard:{
+        width:70,
+        height: 30,
+        borderRadius: 20,
+        backgroundColor:'red',
+        alignItems:'center',
+        justifyContent:'center',
+        marginBottom:3
+
+    },
+    Modal:{
+        display:'flex',
+        alignItems:'center',
+        justifyContent:'center',
+        backgroundColor: 'rgba(0,0,0,0.7)'
+        // width:290,
+        // height:190,
+    },
+    ViewItem:{
+        flex: 1,
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center'
     },
-    
-
-    modal4: {
-        height: 800
+    main: {
+    width:320,
+    height:200,
+    backgroundColor:'#000',
+    borderRadius:10,
+    padding:5
     },
 
-    btn: {
-        margin: 10,
-        backgroundColor: "#3B5998",
-        color: "white",
-        padding: 10
-    },
 
-    btnModal: {
-        position: "absolute",
-        top: 0,
-        right: 0,
-        width: 50,
-        height: 50,
-        backgroundColor: "transparent"
-    },
-
-    text: {
-        color: "black",
+    textTitle: {
+        color: "#fff",
         fontSize: 22
+    },
+    text: {
+        color: "#fff",
+        fontSize: 15,
+        paddingTop: 5,
+        paddingBottom:5
+
+
+    },
+    textDescription: {
+        color: "#fff",
+        fontSize: 15,
+        overflow:'hidden'
     }
 
 });
