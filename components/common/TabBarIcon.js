@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { AntDesign,MaterialCommunityIcons,MaterialIcons,FontAwesome } from '@expo/vector-icons';
 
-import Colors from '../constants/Colors';
+import Colors from '../../constants/Colors';
 import {Platform} from "react-native-web";
 const Size = Platform.OS==='we'?30:20
 export const TabBarIconSearch =(props) => {
