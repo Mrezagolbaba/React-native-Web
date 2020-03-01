@@ -1,14 +1,26 @@
 import React from 'react';
-import DraggableView from 'draggableview';
+import Drawer from 'react-native-advance-draggable-view';
 import { StyleSheet, View } from 'react-native';
 
-const draggableView = (props) =>{
-
+const DraggableComponent = (props) =>{
+    const {renderContainerView}=props
     return(
 
-        <DraggableView
-            style={styles.container}
-            backgroundComponent={<View style={styles.view} />}
+        <Drawer
+            initialDrawerSize={0.09}
+            refFunc={(c) => {
+                this.drawer = c
+            }}
+            renderContainerView={() => renderContainerView}
+            renderDrawerView={() => (
+                <View navigation={this.props.navigation} />)}
+            renderInitDrawerView={() => (<View style={{
+                backgroundColor: 'white',
+                height: 66,
+            }}>
+                {/*<StatusBar hidden={true} />*/}
+                <View style={{height:50,backgroundColor:'#000'}} /> //view you can draggable
+            </View>)}
         />
     )
 
@@ -21,6 +33,7 @@ const styles = StyleSheet.create({
     view: {
         flex: 1,
         backgroundColor: 'red',
+
     },
 });
-export default draggableView
+export default DraggableComponent
