@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import {TabBarIconCafee,TabBarIconRestaurant,TabBarIconSale,TabBarIconSearch} from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import {TabBarIconCafee,TabBarIconRestaurant,TabBarIconSale,TabBarIconSearch} from '../components/common/TabBarIcon';
+import HomeScreen from '../screens/HomeScreen/HomeScreen';
+import LinksScreen from '../screens/LinkScreen/LinksScreen';
 import createCSSStyleSheet from "react-native-web/dist/exports/StyleSheet/createCSSStyleSheet";
 import {StyleSheet} from "react-native";
 
@@ -58,44 +58,8 @@ function TopTabNavigator ({ navigation }) {
         </Tab.Navigator>
     );
 }
- function Coffee() {
-    return (
-        <Tab.Navigator>
-            <Tab.Screen
-                name="Cofee"
-                component={HomeScreen}
-                options={{
-                    tabBarIcon: ({ focused }) => <TabBarIconCafee focused={focused} name="coffee" />,
-                }}
-            />
-            <Tab.Screen
-                name="Resources"
-                component={LinksScreen}
-                options={{
-                    tabBarIcon: ({ focused }) => <TabBarIconRestaurant focused={focused} name="restaurant" />,
-                }}
-            />
-            <Tab.Screen
-                name="Disqaunt"
-                component={LinksScreen}
-                options={{
-                    tabBarIcon: ({ focused }) => <TabBarIconSale focused={focused} name="sale" />,
-                }}
-            />
-            <Tab.Screen
-                name="search"
-                component={LinksScreen}
-                options={{
-                    tabBarIcon: ({ focused }) => <TabBarIconSearch focused={focused} name="search1" />,
-                }}
-            />
-        </Tab.Navigator>
-    );
-}
 export {
-    Coffee,
     TopTabNavigator
-
 }
 
 
