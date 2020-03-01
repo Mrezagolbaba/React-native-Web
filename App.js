@@ -5,22 +5,27 @@ import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import {Provider} from 'react-redux'
 
 import {TopTabNavigator} from './navigation/TopTabNavigator';
-import {Coffee} from './navigation/TopTabNavigator';
 import useLinking from './navigation/useLinking';
+import configureStore from "./utils/Redux/store/store";
 
 const Stack = createStackNavigator();
 
-export default function App(props) {
+ const  App=(props)=> {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
   const [initialNavigationState, setInitialNavigationState] = React.useState();
   const containerRef = React.useRef();
   const { getInitialState } = useLinking(containerRef);
+  // const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+  // const reducer = combineReducers(reducer);
 
+  // const store=createStore(reducer)
   // Load any resources or data that we need prior to rendering the app
   React.useEffect(() => {
     async function loadResourcesAndDataAsync() {
+        // this.props.getListRequest()
       try {
         SplashScreen.preventAutoHide();
 
@@ -47,19 +52,25 @@ export default function App(props) {
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return null;
   } else {
+      const store = configureStore();
     return (
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar  barStyle="default" />}
-        <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
-          <Stack.Navigator>
-            <Stack.Screen name="Root" component={TopTabNavigator} />
-            <Stack.Screen name="Coffee" component={Coffee} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </View>
+        <Provider store={store}>
+              <View style={styles.container}>
+                {Platform.OS === 'ios' && <StatusBar  barStyle="default" />}
+                 <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
+                      <Stack.Navigator>
+                          <Stack.Screen name="Root" component={TopTabNavigator} />
+                      </Stack.Navigator>
+                  </NavigationContainer>
+              </View>
+        </Provider>
+
     );
   }
 }
+
+
+export default App
 
 const styles = StyleSheet.create({
   container: {
