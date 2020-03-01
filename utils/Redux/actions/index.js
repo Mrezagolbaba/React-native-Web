@@ -1,58 +1,57 @@
 import {
-    GET_ARTICLE,
-    GET_ARTICLE_SUCCESS,
-    GET_ARTICLE_FAILURE,
-    GET_SINGLE_ARTICLE,
-    GET_SINGLE_ARTICLE_SUCCESS,
-    GET_SINGLE_ARTICLE_FAILURE
+    GET_PRODUCTS,
+    GET_PRODUCTS_SUCCESS,
+    GET_PRODUCTS_FAILURE,
+    // GET_SINGLE_ARTICLE,
+    // GET_SINGLE_ARTICLE_SUCCESS,
+    // GET_SINGLE_ARTICLE_FAILURE
 } from '../constants';
 
-// GET_ARTICLE function will be dispatched within ARTICLEContainer
-function getArticles () {
-
+// GET_PRODUCTS function will be dispatched within ARTICLEContainer
+function getProducts () {
     return {
-        type: GET_ARTICLE
+        type: GET_PRODUCTS
     };
 }
-/* After fetching form the server this action is intercepted by the reducer and the ARTICLE added to the state */
-function getArticleSuccess (receiveArticle) {
+/* After fetching form the server this action is intercepted by the reducer and the Products added to the state */
+function getProductsSuccess (receiveProducts) {
     return {
-        type: GET_ARTICLE_SUCCESS,
-        receiveArticle
+        type: GET_PRODUCTS_SUCCESS,
+        receiveProducts
     };
 }
-function getArticleFailure () {
+function getProductsFailure () {
     return {
-        type: GET_ARTICLE_FAILURE
+        type: GET_PRODUCTS_FAILURE
     };
 }
 
 //****************************************************************************************************************************************************************//
 //send id for get single page
-function fetchArticleAction (id) {
-    return {
-        type: GET_SINGLE_ARTICLE,
-        id
-    };
-}
-function getArticleSuccessSingle (receiveArticleSingle) {
-    return {
-        type: GET_SINGLE_ARTICLE_SUCCESS,
-        receiveArticleSingle
-    };
-}
-function getArticleFailureSingle () {
-    return {
-        type: GET_SINGLE_ARTICLE_FAILURE
-    };
-}
+// function fetchProductsAction (id) {
+//     return {
+//         type: GET_SINGLE_PRODUCTS,
+//         id
+//     };
+// }
+// function getProductsSuccessSingle (receiveProductsSingle) {
+//     return {
+//         type: GET_SINGLE_PRODUCTS_SUCCESS,
+//         receiveProductsSingle
+//     };
+// }
+// function getProductsFailureSingle () {
+//     return {
+//         type: GET_SINGLE_PRODUCTS_FAILURE
+//     };
+// }
 
 // we export all the function in a single export command
 export {
-    getArticles,
-    getArticleSuccess,
-    getArticleFailure,
-    fetchArticleAction,
-    getArticleSuccessSingle,
-    getArticleFailureSingle
+    getProducts,
+    getProductsSuccess,
+    getProductsFailure,
+    // fetchProductsAction,
+    // getProductsSuccessSingle,
+    // getProductsFailureSingle
 };

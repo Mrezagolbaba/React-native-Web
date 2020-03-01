@@ -1,18 +1,18 @@
 
 import {takeEvery} from 'redux-saga/effects';
 import {put, call,select} from 'redux-saga/effects';
-import {GET_ARTICLE, GET_SINGLE_ARTICLE,} from '../constants';
+import {GET_PRODUCTS, GET_SINGLE_PRODUCT,} from '../constants';
 
 import {
-    getArticleSuccess,
-    getArticleFailure,
-    getArticleSuccessSingle,
-    getArticleFailureSingle
+    getProductsSuccess,
+    getProductsFailure,
+    // getProductSuccessSingle,
+    // getProductFailureSingle
 } from '../actions';
 
 //request for list of items
-const fetchArticle = () => {
-    return fetch('http://localhost:3000/fames?guest=true', {
+const fetchProducts = () => {
+    return fetch('https://api.punkapi.com/v2/beers', {
         method:'GET',
         headers:{
             'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ const fetchArticle = () => {
 };
 
 //request for single items
-const fetchArticleSingle = (id) => {
+const fetchProductsSingle = (id) => {
 
     return fetch('http://localhost:3000/fames/'+id+'?guest=true', {
         method:'GET',
@@ -36,26 +36,26 @@ const fetchArticleSingle = (id) => {
 };
 
 //function for list request
-function* getArticle () {
+function* getProducts () {
     try {
-        const receiveArticle = yield call(fetchArticle);
-        yield put(getArticleSuccess(receiveArticle));
+        const receiveProducts = yield call(fetchProducts);
+        yield put(getProductsSuccess(receiveProducts));
     } catch (err) {
-        yield put(getArticleFailure());
+        yield put(getProductsFailure());
     }
 }
 
 //function for single request
-function* getArticleSingle (action) {
+function* getProductsSingle (action) {
     const id = yield select((state)=>{
-        return state.SingleArticleReducer.id
+        return state.SingleProductReducer.id
     });
     if(id){
         try {
-            const receiveArticleSingle = yield call(fetchArticleSingle,action.id) ;
-            yield put(getArticleSuccessSingle(receiveArticleSingle.data));
+            const receiveProductSingle = yield call(fetchProductSingle,action.id) ;
+            yield put(getProductSuccessSingle(receiveProductSingle.data));
         } catch (err) {
-            yield put(getArticleFailureSingle());
+            yield put(getProductFailureSingle());
         }
     }
 
@@ -63,14 +63,14 @@ function* getArticleSingle (action) {
 
 
 //watcher for all of function
-function* watchGetArticle () {
+function* watchGetProducts () {
 
-    yield takeEvery(GET_ARTICLE, getArticle);
+    yield takeEvery(GET_PRODUCTS, getProducts);
 
-    yield takeEvery(GET_SINGLE_ARTICLE, getArticleSingle);
+    // yield takeEvery(GET_SINGLE_PRODUCT, getProductsSingle);
 
 }
 
 export {
-    watchGetArticle
+    watchGetProducts
 };

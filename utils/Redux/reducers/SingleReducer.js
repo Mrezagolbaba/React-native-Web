@@ -1,25 +1,25 @@
-import {
-    GET_SINGLE_ARTICLE_SUCCESS,
-    GET_SINGLE_ARTICLE_FAILURE, GET_SINGLE_ARTICLE
-} from '../constants';
-const initialStateSingle = [];
-//reducer for single article
-export const SingleArticleReducer = (state = initialStateSingle, action={}) => {
-    switch (action.type) {
-        case GET_SINGLE_ARTICLE:
-            return {
-                ...state,
-                id: action.id
-            };
-        case GET_SINGLE_ARTICLE_SUCCESS:
-            return  {
-                ...state,
-                return:action.receiveArticleSingle
-            };
-        case  GET_SINGLE_ARTICLE_FAILURE:
-            return [];
-        default:
-            return state;
-
-    }
-};
+// import {
+//     GET_SINGLE_PRODUCT_SUCCESS,
+//     GET_SINGLE_PRODUCT_FAILURE, GET_SINGLE_PRODUCT
+// } from '../constants';
+// const initialStateSingle = [];
+// //reducer for single Product
+// export const SingleProductReducer = (state = initialStateSingle, action={}) => {
+//     switch (action.type) {
+//         case GET_SINGLE_PRODUCT:
+//             return {
+//                 ...state,
+//                 id: action.id
+//             };
+//         case GET_SINGLE_PRODUCT_SUCCESS:
+//             return  {
+//                 ...state,
+//                 return:action.receiveProductSingle
+//             };
+//         case  GET_SINGLE_PRODUCT_FAILURE:
+//             return [];
+//         default:
+//             return state;
+//
+//     }
+// };
